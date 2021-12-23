@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/cities")
+@CrossOrigin("*")
 public class CityController {
     @Autowired
     private ICityRepository cityService;
@@ -43,7 +44,7 @@ public class CityController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("update/{id}")
     public ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody City city){
         Optional<City> cityOptional = cityService.findById(id);
         if(!cityOptional.isPresent()){
@@ -54,7 +55,7 @@ public class CityController {
         return new ResponseEntity<>(city, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("find/{id}")
     public ResponseEntity<City> findById(@PathVariable Long id){
         Optional<City> cityOptional = cityService.findById(id);
         if(!cityOptional.isPresent()){
